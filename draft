@@ -7,11 +7,11 @@ import datetime
 
 #directory functions here
 
-file_list = []
-
 #takes a path and prints the files in that directory
 def directories(a_path):
     'D = discovers ONLY immediate directory files'
+    
+    file_list = []
     
     if a_path.is_dir() == True:
         for single_file in a_path.iterdir():
