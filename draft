@@ -6,11 +6,10 @@ import os
 import datetime
 
 #directory functions here
-
 #takes a path and prints the files in that directory
 def directories(a_path):
     'D = discovers ONLY immediate directory files'
-    
+
     file_list = []
     
     if a_path.is_dir() == True:
@@ -35,25 +34,25 @@ def subdirectories(b_path):
             if files.is_file():
                 pass
             elif files.is_dir():
-                subdirectories(files) 
+                subdirectories(files)
     else:
         error_msg()
 
 #refining functions here
+def interesting(ifiles):
+    'A = marks files as interesting'
+    
+    print(interesting_files)
+
+
 def files_with(paths):
     'N = finds all paths that end with the given name'
-    print(file_list)
     for paths in file_list:
         if paths.name == msg:
             print(paths)
-
-def interesting():
-    'A = marks files as interesting'
-    interesting_files = file_list
-    print(interesting_files)
     
 def extensions():
-    #
+    'searches files that match with this ending extension'
     pass
     
 def touch_files():
@@ -82,43 +81,44 @@ def error_msg():
 
 #running
 
-while True:
-    msg = input()
-    the_path = Path(msg[2:])
+msg = input()
+the_path = Path(msg[2:])
 
-    if msg[2:] == '':
-        error_msg()
+if msg[2:] == '':
+    error_msg()
 
-    elif the_path.exists():
-        if msg.startswith('D '):
-            directories(the_path)
+elif the_path.exists():
+    if msg.startswith('D '):
+        directories(the_path)
             
-        elif msg.startswith('R '):
-            subdirectories(the_path)
+    elif msg.startswith('R '):
+        subdirectories(the_path)
 
 #refining search
-            
-        elif msg.startswith('N '):
+    while the_path.exists():
+        nextmsg = input()
+        if nextmsg.startswith('N '):
             files_with(the_path)
-            
-        elif msg == 'A':
-            interesting()
-            
-        elif msg.startswith('E '):
-            extensions()
-            
-        elif msg.startswith('T '):
-            touch_files()
-            
-        elif msg.startswith('< ') | msg.startswith('> '):
-            file_size()
-            
-        elif msg == 'F':
-            line_of_text()
-        elif msg == 'D':
-            duplicate()
 
-    
+        elif nextmsg == 'A':
+            interesting(the_path) 
+                    
+        elif nextmsg.startswith('E '):
+            extensions()
+                        
+        elif nextmsg.startswith('T '):
+            touch_files()
+                        
+        elif nextmsg.startswith('< ') | msg.startswith('> '):
+            file_size()
+                        
+        elif nextmsg == 'F':
+            line_of_text()
+            
+        elif nextmsg == 'D':
+            nextduplicate()
+        else:
+            error_msg()
 
     #E = extensions w or w out period proceeding it
     #T = text files
@@ -133,4 +133,4 @@ while True:
 
 
 
-   
+    
